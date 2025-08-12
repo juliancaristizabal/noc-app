@@ -9,7 +9,17 @@ El objetivo fue crear una serie de tareas usando Arquitectura Limpia (o Hexagona
 
 ```
 PORT=3000
-MAILER_EMAIL=
-MAILER_SECRET_KEY=
+MAILER_EMAIL=correo@gmail.com
+MAILER_SECRET_KEY=12345
 PROD=false
+```
+
+3. Ejecuta el comando:
+```
+npm install
+```
+
+4. Para iniciar la aplicación ejecutar el comando:
+```
+npm run dev
 ```
