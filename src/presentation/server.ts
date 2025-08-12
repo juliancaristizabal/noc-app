@@ -1,16 +1,20 @@
-// import { CheckService } from "../domain/use-cases/checks/check-service";
-// import { CronService } from "./cron/cron-service";
+import { CheckService } from "../domain/use-cases/checks/check-service";
+import { CronService } from "./cron/cron-service";
 
 import { SendEmailsLogs } from "../domain/use-cases/logs/email/send-email-logs";
 import { FileSystemDatasource } from "../infrastructure/datasources/file-system.datasource";
 import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository.impl";
 import { EmailService } from "./email/email.service";
+import { MongoLogDataSource } from "../infrastructure/datasources/mongo-log.datasource";
+import { LogSeverityLevel } from "../domain/entities/log.entity";
 
 // Este punto es importante porque acá es donde se hacen
 // los cambios de repositorios.
 
-const fileSystemRepository = new LogRepositoryImpl(
-    new FileSystemDatasource()
+
+const logRepository = new LogRepositoryImpl(
+    new MongoLogDataSource(),
+    // new FileSystemDatasource()
 );
 
 const emailService = new EmailService();
@@ -19,7 +23,7 @@ const emailService = new EmailService();
 
 export class Server {
 
-    public static start() {
+    public static async start() {
         console.log('The server is running...');
 
 
@@ -47,6 +51,8 @@ export class Server {
 
 
 
+        const logs = await logRepository.getLogs(LogSeverityLevel.low);
+        console.log(logs);
 
 
 // 
@@ -54,13 +60,11 @@ export class Server {
         //     '*/5 * * * * *',
         //     () => {
         //         const url = 'https://google.com';
-        //         // const url = 'http://localhost:3000';
         //         new CheckService(
-        //             fileSystemRepository,
+        //             LogRepository,
         //             () => console.log(`server: ${url} - success connection.`),
         //             (error) => console.log(error),
         //         ).execute(url);
-        //         // new CheckService().execute('https://google.com');
         //     }
         // );
     };
