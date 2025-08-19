@@ -12,12 +12,51 @@ import { Server } from "./presentation/server";
 
 
 async function main() {
-
-
+    
     await MongoDataBase.connect({
         mongoUrl: envs.MONGO_URL,
         dbName: envs.MONGO_DB_NAME,
     });
+    
+    
+    Server.start();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Esta clase solo es posible si se realiza la migración del schema.prisma
+    // const prisma = new PrismaClient();
+    // const newLog = await prisma.logModel.create({
+    //     data: {
+    //         level: 'HIGH',
+    //         message: 'Test message',
+    //         origin: 'App.ts'
+    //     }
+    // });
+
+    // const logs  = await prisma.logModel.findMany();
+
+    // console.log({ newLog });
+
+
+
+
+
+
+
+
+
+
 
 
     // Crear un colección = tables, documento = registro
@@ -34,9 +73,6 @@ async function main() {
     // Buscar elemento en la BD
 
     // const logs = await logModel.find();
-    // console.log(logs[0].message);
-    
-    
+    // console.log(logs[0].message);   
 
-    Server.start();
 };

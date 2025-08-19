@@ -19,7 +19,12 @@ PROD=false
 npm install
 ```
 
-4. Para iniciar la aplicación ejecutar el comando:
+4. Levantar las bases de datos con el comando (debes tener Docker instalado):
+```
+docker compose up -d
+```
+
+5. Para iniciar la aplicación ejecutar el comando:
 ```
 npm run dev
 ```

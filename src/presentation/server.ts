@@ -7,14 +7,23 @@ import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository
 import { EmailService } from "./email/email.service";
 import { MongoLogDataSource } from "../infrastructure/datasources/mongo-log.datasource";
 import { LogSeverityLevel } from "../domain/entities/log.entity";
+import { PostgresLogDataSource } from "../infrastructure/datasources/postgres-log.datasource";
+import { CheckServiceMultiple } from "../domain/use-cases/checks/check-service-multiple";
 
 // Este punto es importante porque acá es donde se hacen
 // los cambios de repositorios.
 
 
-const logRepository = new LogRepositoryImpl(
+const fsLogRepository = new LogRepositoryImpl(
+    new FileSystemDatasource(),
+);
+
+const mongoLogRepository = new LogRepositoryImpl(
     new MongoLogDataSource(),
-    // new FileSystemDatasource()
+);
+
+const postgresLogRepository = new LogRepositoryImpl(    
+    new PostgresLogDataSource(),
 );
 
 const emailService = new EmailService();
@@ -25,6 +34,9 @@ export class Server {
 
     public static async start() {
         console.log('The server is running...');
+
+
+
 
 
 // 
@@ -51,22 +63,22 @@ export class Server {
 
 
 
-        const logs = await logRepository.getLogs(LogSeverityLevel.low);
-        console.log(logs);
+        // const logs = await logRepository.getLogs(LogSeverityLevel.low);
+        // console.log(logs);
 
 
 // 
-        // CronService.createJob(
-        //     '*/5 * * * * *',
-        //     () => {
-        //         const url = 'https://google.com';
-        //         new CheckService(
-        //             LogRepository,
-        //             () => console.log(`server: ${url} - success connection.`),
-        //             (error) => console.log(error),
-        //         ).execute(url);
-        //     }
-        // );
+        CronService.createJob(
+            '*/5 * * * * *',
+            () => {
+                const url = 'https://google.com';
+                new CheckServiceMultiple(
+                    [ fsLogRepository, postgresLogRepository, mongoLogRepository ],
+                    () => console.log(`server: ${url} - success connection.`),
+                    (error) => console.log(error),
+                ).execute(url);
+            }
+        );
     };
 };
 
