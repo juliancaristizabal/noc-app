@@ -11,13 +11,13 @@ type ErrorCallback = (error: string) => void;
 
 export class CheckService implements CheckServiceUseCase {
 
-    private readonly origin = 'check-service.ts'
+    private readonly origin = 'check-service.ts';
 
     constructor(
         private readonly LogRepository: LogRepository,
         private readonly successCallback: SuccessCallback,
         private readonly errorCallback: ErrorCallback
-    ) { };
+    ) {};
 
     public async execute(url: string): Promise<boolean> {
 

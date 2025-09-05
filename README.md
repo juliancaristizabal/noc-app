@@ -1,10 +1,10 @@
 # Proyecto NOC
 
-El objetivo fue crear una serie de tareas usando Arquitectura Limpia (o Hexagonal) con TypeScript.
+El objetivo fue crear una serie de tareas usando Arquitectura Limpia (o Hexagonal) con TypeScript. y Realizar test de la aplicación
 
 # dev
 
-1. Clonar el archivo .env.template a .env
+1. Clonar el archivo .env.test a .env
 2. Configurar las variables de entorno
 
 ```
@@ -24,7 +24,12 @@ npm install
 docker compose up -d
 ```
 
-5. Para iniciar la aplicación ejecutar el comando:
+5. Ejecuta el comando para migrar los esquemas de prisma:
+```
+npx prisma migrate dev --name init
+```
+
+6. Para iniciar la aplicación ejecutar el comando:
 ```
 npm run dev
 ```

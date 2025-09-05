@@ -10,7 +10,12 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
-    // "isolatedModules": true,
+
+    //Requeridos por testing con jest-ts 
+    "esModuleInterop": true,
+    "isolatedModules": true,
+
+
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],

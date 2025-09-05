@@ -1,7 +1,5 @@
 version: '3.8'
 
-# Tener en cuenta la tabulación!
-
 services:
   mongo-db:
     image: mongo:6.0.6
@@ -12,7 +10,7 @@ services:
     volumes:
       - ./mongo-test:/data/db
     ports:
-      - 27017:27017
+      - 27018:27017
   
   postgres-db:
     image: postgres:15.13
