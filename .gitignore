@@ -1,6 +1,7 @@
 
 
 
+coverage/
 node_modules/
 dist/
 
@@ -18,6 +19,5 @@ postgres/
 mongo-test/
 postgres-test/
 
-coverage/
 
 /src/generated/prisma

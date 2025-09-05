@@ -33,3 +33,8 @@ npx prisma migrate dev --name init
 ```
 npm run dev
 ```
+
+7. Para iniciar los test de la aplicación ejecutar el comando: (si salen errores ejecutar nuevamente)
+```
+npm run test:watch
+```
