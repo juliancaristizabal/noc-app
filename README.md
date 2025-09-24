@@ -1,6 +1,6 @@
 # Proyecto NOC
 
-El objetivo fue crear una serie de tareas usando Arquitectura Limpia (o Hexagonal) con TypeScript. y Realizar test de la aplicación
+La aplicación implementa un sistema de logging con salidas a filesystem, base de datos y consola. El proyecto sigue los principios de Arquitectura Limpia en TypeScript y dispone de una suite de pruebas automatizadas para validar su comportamiento.
 
 # dev
 
